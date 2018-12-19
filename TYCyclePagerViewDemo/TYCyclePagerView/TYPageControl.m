@@ -230,18 +230,18 @@
     switch (self.contentHorizontalAlignment) {
         case UIControlContentHorizontalAlignmentCenter:
             // ignore contentInset
-            orignX = (CGRectGetWidth(self.frame) - (_indicatorViews.count - 1) * (_pageIndicatorSize.width + _pageIndicatorSpaing) - _pageIndicatorSize.width)/2;
+//            orignX = (self.contentSize.width - (_indicatorViews.count - 1) * (_pageIndicatorSize.width + _pageIndicatorSpaing) - _pageIndicatorSize.width)/2;
             break;
         case UIControlContentHorizontalAlignmentLeft:
             orignX = _contentInset.left;
             break;
         case UIControlContentHorizontalAlignmentRight:
-            orignX = CGRectGetWidth(self.frame) - ((_indicatorViews.count - 1) * (_pageIndicatorSize.width + _pageIndicatorSpaing) - _pageIndicatorSize.width) - _contentInset.right;
+            orignX = self.contentSize.width - ((_indicatorViews.count - 1) * (_pageIndicatorSize.width + _pageIndicatorSpaing) - _pageIndicatorSize.width) - _contentInset.right;
             break;
         case UIControlContentHorizontalAlignmentFill:
             orignX = _contentInset.left;
             if (_indicatorViews.count > 1) {
-                pageIndicatorSpaing = (CGRectGetWidth(self.frame) - _contentInset.left - _contentInset.right - _pageIndicatorSize.width - (_indicatorViews.count - 1) * _pageIndicatorSize.width)/(_indicatorViews.count - 1);
+                pageIndicatorSpaing = (self.contentSize.width - _contentInset.left - _contentInset.right - _pageIndicatorSize.width - (_indicatorViews.count - 1) * _pageIndicatorSize.width)/(_indicatorViews.count - 1);
             }
             break;
         default:
@@ -249,16 +249,16 @@
     }
     switch (self.contentVerticalAlignment) {
         case UIControlContentVerticalAlignmentCenter:
-            centerY = CGRectGetHeight(self.frame)/2;
+//            centerY = self.contentSize.height/2;
             break;
         case UIControlContentVerticalAlignmentTop:
             centerY = _contentInset.top + _currentPageIndicatorSize.height/2;
             break;
         case UIControlContentVerticalAlignmentBottom:
-            centerY = CGRectGetHeight(self.frame) - _currentPageIndicatorSize.height/2 - _contentInset.bottom;
+            centerY = self.contentSize.height - _currentPageIndicatorSize.height/2 - _contentInset.bottom;
             break;
         case UIControlContentVerticalAlignmentFill:
-            centerY = (CGRectGetHeight(self.frame) - _contentInset.top - _contentInset.bottom)/2 + _contentInset.top;
+            centerY = (self.contentSize.height - _contentInset.top - _contentInset.bottom)/2 + _contentInset.top;
             break;
         default:
             break;
@@ -271,7 +271,7 @@
             indicatorView.layer.cornerRadius = _currentPage == index ? _currentPageIndicatorSize.height/2 : _pageIndicatorSize.height/2;
         }
         CGSize size = index == _currentPage ? _currentPageIndicatorSize : _pageIndicatorSize;
-        indicatorView.frame = CGRectMake(orignX, centerY - size.height, size.width, size.height);
+        indicatorView.frame = CGRectMake(orignX, centerY, size.width, size.height);
         orignX += size.width + pageIndicatorSpaing;
         ++index;
     }
